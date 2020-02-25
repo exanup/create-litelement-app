@@ -25,10 +25,15 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['@babel/preset-env', {
-                targets: {ie: '11'},
-                useBuiltIns: 'entry'
-              }]
+              [
+                '@babel/preset-env',
+                {
+                  targets: { chrome: '78' },
+                  modules: false,
+                  useBuiltIns: 'entry',
+                  corejs: 2
+                }
+              ]
             ],
             plugins: ['@babel/plugin-syntax-dynamic-import']
           }
@@ -37,10 +42,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      'images/**',
-      'manifest.json'
-    ]),
+    new CopyWebpackPlugin(['images/**', 'manifest.json']),
     new HtmlWebpackPlugin({
       chunksSortMode: 'none',
       template: 'index.html'
